@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemstone Metaphysical & Spiritual Properties Guide — Interactive Reference & Trio Analyzer</title>
+  <style>
+    :root {
+      --bg-main: #0B0F19;
+      --bg-card: #131B2E;
+      --bg-card-hover: #1E293B;
+      --bg-surface: #0F172A;
+      --border-color: #1E293B;
+      --border-subtle: #334155;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-sub: #64748B;
+      --primary: #0D9488;
+      --primary-light: #14B8A6;
+      --primary-glow: rgba(13, 148, 136, 0.25);
+      --accent: #CA8A04;
+      --danger: #DC2626;
+      --danger-bg: #450A0A;
+      --danger-border: #991B1B;
+      --success: #16A34A;
+      --success-bg: #052E16;
+      --success-border: #166534;
+      --warning: #D97706;
+      --warning-bg: #451A03;
+      --warning-border: #9A3412;
+      --info: #2563EB;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+    }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      background: linear-gradient(135deg, #2DD4BF, #38BDF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-main);
+      background: var(--bg-card-hover);
+    }
+
+    .nav-links a.highlight {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(37, 99, 235, 0.2));
+      color: #2DD4BF;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+
+    /* Layout Containers */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 36px 20px 24px;
+      background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.15) 0%, transparent 65%);
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2DD4BF;
+      background: rgba(13, 148, 136, 0.15);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Section Styling */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
+    /* ========================================================= */
+    /* INTERACTIVE TRIO SELECTOR & ANALYZER */
+    /* ========================================================= */
+    .analyzer-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .analyzer-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0D9488, #3B82F6, #EC4899, #F59E0B);
+    }
+
+    .analyzer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .analyzer-title h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .analyzer-title p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .preset-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 7px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: #FCA5A5;
+    }
+
+    .btn-danger:hover {
+      background: #7F1D1D;
+    }
+
+    /* Gemstones Selector Grid */
+    .stone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .stone-chip {
+      background: var(--bg-surface);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+      position: relative;
+    }
+
+    .stone-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-subtle);
+      background: var(--bg-card-hover);
+    }
+
+    .stone-chip.selected {
+      border-color: var(--primary);
+      background: rgba(13, 148, 136, 0.12);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    .bead-preview {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      box-shadow: inset -2px -2px 6px rgba(0,0,0,0.6), 2px 2px 8px rgba(0,0,0,0.5);
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .bead-preview::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      width: 10px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      transform: rotate(-25deg);
+    }
+
+    .stone-chip-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .stone-chip-meta {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .stone-chip-checkbox {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: transparent;
+      transition: all 0.2s;
+    }
+
+    .stone-chip.selected .stone-chip-checkbox {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Live Bracelet Mockup */
+    .bracelet-dock {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dock-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dock-string {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-main);
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px dashed var(--border-subtle);
+    }
+
+    .dock-slot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+
+    .dock-slot.filled {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .dock-bead {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px dashed var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .dock-slot.filled .dock-bead {
+      border: none;
+      box-shadow: inset -2px -2px 4px rgba(0,0,0,0.5), 1px 1px 6px rgba(0,0,0,0.4);
+    }
+
+    .dock-counter {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #2DD4BF;
+      background: rgba(13, 148, 136, 0.15);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    /* Dynamic Results Container */
+    .analyzer-result {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-banner {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .banner-good {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: #86EFAC;
+    }
+
+    .banner-avoid {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: #FCA5A5;
+    }
+
+    .banner-dual {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: #FDE047;
+    }
+
+    .banner-custom {
+      background: #172554;
+      border: 1px solid #1E40AF;
+      color: #93C5FD;
+    }
+
+    .banner-text h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .banner-text p {
+      font-size: 0.85rem;
+      margin-top: 3px;
+      opacity: 0.9;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .result-card.card-good {
+      border-left: 4px solid var(--success);
+    }
+
+    .result-card.card-avoid {
+      border-left: 4px solid var(--danger);
+    }
+
+    .result-card.card-wear {
+      border-left: 4px solid #F59E0B;
+    }
+
+    .card-header-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .badge-good {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ADE80;
+    }
+
+    .badge-avoid {
+      background: rgba(239, 68, 68, 0.15);
+      color: #F87171;
+    }
+
+    .badge-wear {
+      background: rgba(245, 158, 11, 0.15);
+      color: #FBBF24;
+    }
+
+    .result-card h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .result-card .stones-sub {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .result-card p {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .result-card strong {
+      color: var(--text-main);
+    }
+
+    /* Mohs Clashing Meter */
+    .mohs-meter-box {
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .mohs-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+    }
+
+    .mohs-delta-badge {
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .delta-high {
+      background: #7F1D1D;
+      color: #FECACA;
+    }
+
+    .delta-med {
+      background: #78350F;
+      color: #FDE68A;
+    }
+
+    .delta-low {
+      background: #064E3B;
+      color: #A7F3D0;
+    }
+
+    /* Chakras & Elements Radar Bar */
+    .balance-meters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .balance-meters { grid-template-columns: 1fr; }
+    }
+
+    .meter-group h5 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .meter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meter-tag {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      font-weight: 600;
+    }
+
+    /* ========================================================= */
+    /* MASTER REFERENCE TABLE (SECTION 1) */
+    /* ========================================================= */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      background: var(--bg-card);
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip-filter {
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .chip-filter:hover {
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
+
+    .chip-filter.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    thead th {
+      background: #0A0F1D;
+      color: #F8FAFC;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+      color: #CBD5E1;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .stone-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .cell-bead {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: inset -1px -1px 2px rgba(0,0,0,0.6);
+    }
+
+    .tag-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #2DD4BF;
+      background: rgba(13, 148, 136, 0.15);
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-top: 3px;
+      margin-right: 3px;
+    }
+
+    /* Cards Grid (Sections 5 & 6) */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .trio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .trio-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: var(--border-subtle);
+    }
+
+    .trio-card.curated {
+      border-top: 3px solid #0D9488;
+    }
+
+    .trio-card.avoid {
+      border-top: 3px solid #DC2626;
+      background: #141215;
+    }
+
+    .trio-card-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .trio-card.avoid .trio-card-title {
+      color: #FCA5A5;
+    }
+
+    .trio-card-stones {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .trio-card-body {
+      font-size: 0.76rem;
+      color: #94A3B8;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .trio-card.avoid .trio-card-body strong {
+      color: #F87171;
+    }
+
+    .trio-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+      margin-top: auto;
+    }
+
+    .btn-test {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-test:hover {
+      color: white;
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    /* Accordion / Tab Panels */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 18px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      color: #2DD4BF;
+      border-bottom-color: #2DD4BF;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .info-box h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2DD4BF;
+      margin-bottom: 10px;
+    }
+
+    .info-box ul {
+      list-style-type: none;
+    }
+
+    .info-box li {
+      font-size: 0.78rem;
+      color: #CBD5E1;
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    /* Scratch Test Simulator */
+    .scratch-sim {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .scratch-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .select-stone {
+      padding: 8px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .scratch-result-box {
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-sub);
+      font-size: 0.8rem;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <a href="#analyzer" class="nav-brand">
+      <span>💎 Gemstone Guide</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#analyzer" class="highlight">🔮 Trio Analyzer</a>
+      <a href="#master-table">📖 Master Reference</a>
+      <a href="#affinities">🔗 Affinities Index</a>
+      <a href="#circuits">⚡ Resonant Circuits</a>
+      <a href="#wrist-dynamics">✋ Wrist Dynamics</a>
+      <a href="#curated-catalog">✨ Curated Trios (30)</a>
+      <a href="#avoid-catalog">⚠️ Trios to Avoid (30)</a>
+      <a href="#mohs-rules">🛡️ Rules & Mohs</a>
+    </nav>
+  </header>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="hero-badge">Interactive Master Reference & Trio Checker</div>
+    <h1>Gemstone Metaphysical & Spiritual Properties Guide</h1>
+    <p>Explore the spiritual properties, chakra resonances, left/right hand wearing dynamics, and interactive trio compatibility for all 8 foundational gemstones.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- ========================================================= -->
+    <!-- INTERACTIVE TRIO SELECTOR & ANALYZER -->
+    <!-- ========================================================= -->
+    <section id="analyzer" class="analyzer-wrapper">
+      <div class="analyzer-header">
+        <div class="analyzer-title">
+          <h2>🔮 Interactive Bracelet Trio Analyzer</h2>
+          <p>Click any 3 gemstones below to instantly evaluate energetic harmony, avoid conflicts, and Mohs hardness wear risks.</p>
+        </div>
+        <div class="preset-buttons">
+          <button class="btn btn-primary" onclick="loadRandomGoodTrio()">✨ Random Good Trio</button>
+          <button class="btn btn-danger" onclick="loadRandomAvoidTrio()">⚠️ Random Avoid Trio</button>
+          <button class="btn" onclick="loadContextualTrio()">🔄 Contextual Trio</button>
+          <button class="btn" onclick="clearSelection()">❌ Clear</button>
+        </div>
+      </div>
+
+      <!-- 8 Gemstone Selection Chips -->
+      <div class="stone-grid" id="stoneSelectorGrid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Live Bracelet Dock -->
+      <div class="bracelet-dock">
+        <div class="dock-title">
+          <span>Current Selection:</span>
+          <span class="dock-counter" id="selectionCountBadge">0 / 3 Selected</span>
+        </div>
+        <div class="dock-string" id="dockString">
+          <div class="dock-slot" id="slot-0"><div class="dock-bead">1</div><span>Select Stone</span></div>
+          <div class="dock-slot" id="slot-1"><div class="dock-bead">2</div><span>Select Stone</span></div>
+          <div class="dock-slot" id="slot-2"><div class="dock-bead">3</div><span>Select Stone</span></div>
+        </div>
+      </div>
+
+      <!-- Dynamic Analysis Results -->
+      <div class="analyzer-result" id="analyzerResultsBox" style="display: none;">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 1: MASTER REFERENCE TABLE -->
+    <!-- ========================================================= -->
+    <section id="master-table">
+      <h2 class="section-title">📖 1. Metaphysical & Spiritual Properties Master Reference</h2>
+      <p class="section-desc">Comprehensive reference of the 8 foundational gemstones. Filter by chakra, element, or search by keywords.</p>
+
+      <div class="filter-bar">
+        <input type="text" id="stoneSearchInput" class="search-input" placeholder="🔍 Search stones, chakras, themes, or keywords..." oninput="filterMasterTable()">
+        <div class="filter-group" id="chakraFilterGroup">
+          <span class="chip-filter active" onclick="setChakraFilter('ALL', this)">All Chakras</span>
+          <span class="chip-filter" onclick="setChakraFilter('Root', this)">Root</span>
+          <span class="chip-filter" onclick="setChakraFilter('Sacral', this)">Sacral</span>
+          <span class="chip-filter" onclick="setChakraFilter('Solar Plexus', this)">Solar Plexus</span>
+          <span class="chip-filter" onclick="setChakraFilter('Heart', this)">Heart</span>
+          <span class="chip-filter" onclick="setChakraFilter('Throat', this)">Throat</span>
+          <span class="chip-filter" onclick="setChakraFilter('Third Eye', this)">Third Eye</span>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Gemstone</th>
+              <th>Primary Chakra</th>
+              <th>Element</th>
+              <th>Core Theme</th>
+              <th>Resonances (Sister Stones)</th>
+              <th>Key Metaphysical Properties</th>
+              <th>Emotional & Energetic Support</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="masterTableBody">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2: AFFINITIES & RESONANCES -->
+    <!-- ========================================================= -->
+    <section id="affinities" style="margin-bottom: 40px;">
+      <h2 class="section-title">🔗 2. Gemstone Affinities & Cross-Reference Index</h2>
+      <p class="section-desc">Explore categorical resonances by chakras, foundational elements, archetypal pairings, and daily wellness.</p>
+
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('tab-chakras', this)">Chakra Centers</button>
+        <button class="tab-btn" onclick="switchTab('tab-elements', this)">Elemental Alignments</button>
+        <button class="tab-btn" onclick="switchTab('tab-archetypes', this)">Functional Archetypes</button>
+        <button class="tab-btn" onclick="switchTab('tab-wellness', this)">Daily Wellness</button>
+      </div>
+
+      <div id="tab-chakras" class="tab-pane active">
+        <div class="grid-2">
+          <div class="info-box">
+            <h4>Root Chakra (Muladhara) — Grounding & Boundaries</h4>
+            <p><strong>Stones:</strong> Black Onyx, Black Tourmaline, Black Obsidian, Red Coral, Tiger's Eye.</p>
+            <p><strong>Shared Role:</strong> Anchors personal energy to earth, stabilizes the physical body, and instills unshakeable personal security.</p>
+          </div>
+          <div class="info-box">
+            <h4>Sacral Chakra (Svadhisthana) — Vitality & Passion</h4>
+            <p><strong>Stones:</strong> Red Coral, Tiger's Eye.</p>
+            <p><strong>Shared Role:</strong> Ignites core life-force (prana/chi), awakens creative passion, and overcomes chronic lethargy or inertia.</p>
+          </div>
+          <div class="info-box">
+            <h4>Solar Plexus (Manipura) — Willpower & Confidence</h4>
+            <p><strong>Stones:</strong> Tiger's Eye, Malachite.</p>
+            <p><strong>Shared Role:</strong> Fuels practical manifestation, sharpens business discernment, and overcomes imposter syndrome.</p>
+          </div>
+          <div class="info-box">
+            <h4>Heart Chakra (Anahata) — Transformation & Compassion</h4>
+            <p><strong>Stones:</strong> Malachite, Blue Turquoise.</p>
+            <p><strong>Shared Role:</strong> Deep emotional detox, mending heartbreak, and softening ego defenses into genuine vulnerability.</p>
+          </div>
+          <div class="info-box">
+            <h4>Throat Chakra (Vishuddha) — Authentic Expression</h4>
+            <p><strong>Stones:</strong> Blue Turquoise, Lapis Lazuli.</p>
+            <p><strong>Shared Role:</strong> Dissolves speech blockages, aligns vocal expression with authentic inner truth, and brings diplomatic calm.</p>
+          </div>
+          <div class="info-box">
+            <h4>Third Eye Chakra (Ajna) — Intuition & Higher Wisdom</h4>
+            <p><strong>Stones:</strong> Lapis Lazuli.</p>
+            <p><strong>Shared Role:</strong> Visionary awareness, intellectual expansion, connecting with higher guidance, and meditative depth.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-elements" class="tab-pane">
+        <div class="grid-2">
+          <div class="info-box">
+            <h4>Earth Element — Structure & Pragmatic Discipline</h4>
+            <p><strong>Stones:</strong> Black Onyx, Black Tourmaline, Black Obsidian, Tiger's Eye, Malachite, Blue Turquoise.</p>
+            <p>Solidifies intention into physical reality, strengthens boundaries, and prevents emotional overwhelm.</p>
+          </div>
+          <div class="info-box">
+            <h4>Fire Element — Vitality, Action & Transformation</h4>
+            <p><strong>Stones:</strong> Red Coral, Tiger's Eye, Black Obsidian (volcanic), Malachite (catalyst).</p>
+            <p>Burns away hesitation, ignites physical endurance, sparks creative courage, and drives personal evolution.</p>
+          </div>
+          <div class="info-box">
+            <h4>Water Element — Emotional Flow & Cellular Cleansing</h4>
+            <p><strong>Stones:</strong> Red Coral (oceanic), Blue Turquoise, Lapis Lazuli.</p>
+            <p>Soothes nervous tension, washes away grief, and facilitates gentle emotional release without trauma.</p>
+          </div>
+          <div class="info-box">
+            <h4>Wind / Storm Element — Mental Clarity & Divine Truth</h4>
+            <p><strong>Stones:</strong> Lapis Lazuli (Wind), Blue Turquoise (Storm).</p>
+            <p>Expands consciousness, eliminates mental static and brain fog, and bridges spiritual vision with daily speech.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-archetypes" class="tab-pane">
+        <div class="grid-2">
+          <div class="info-box">
+            <h4>The Protective Shield & Filter</h4>
+            <p><strong>Pair:</strong> Black Tourmaline (External Shield) + Black Onyx (Internal Containment)</p>
+            <p>Tourmaline deflects environmental chaos and EMFs while Onyx builds inner discipline, emotional containment, and stamina.</p>
+          </div>
+          <div class="info-box">
+            <h4>The Excavators & Pattern Breakers</h4>
+            <p><strong>Pair:</strong> Black Obsidian (The Mirror) + Malachite (The Catalyst)</p>
+            <p>Obsidian uncovers subconscious shadows and severs etheric cords; Malachite compels the heart to break obsolete patterns.</p>
+          </div>
+          <div class="info-box">
+            <h4>The Communicators & Truth-Speakers</h4>
+            <p><strong>Pair:</strong> Lapis Lazuli (Higher Wisdom) + Blue Turquoise (Heart-Centered Speech)</p>
+            <p>Lapis sparks intellectual clarity and divine truth; Turquoise softens articulation with serene diplomacy.</p>
+          </div>
+          <div class="info-box">
+            <h4>The Vitalizers & Action Igniters</h4>
+            <p><strong>Pair:</strong> Red Coral (Primal Passion) + Tiger's Eye (Calculated Willpower)</p>
+            <p>Coral supplies the biological spark of life-force; Tiger's Eye focuses that raw energy into strategic follow-through.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-wellness" class="tab-pane">
+        <div class="grid-2">
+          <div class="info-box">
+            <h4>Anxiety, Sensory Overload & Stress</h4>
+            <p><strong>Primary:</strong> Blue Turquoise • <strong>Support:</strong> Black Onyx, Black Tourmaline</p>
+            <p>De-escalates frantic thoughts, absorbs ambient stress from crowds, and restores serene baseline calm.</p>
+          </div>
+          <div class="info-box">
+            <h4>Grief, Emotional Release & Shadow Healing</h4>
+            <p><strong>Primary:</strong> Black Obsidian • <strong>Support:</strong> Black Onyx, Malachite</p>
+            <p>Unearths buried sorrow, provides containment during catharsis, and restores emotional wholeness.</p>
+          </div>
+          <div class="info-box">
+            <h4>Procrastination, Fatigue & Building Momentum</h4>
+            <p><strong>Primary:</strong> Tiger's Eye • <strong>Support:</strong> Red Coral, Malachite</p>
+            <p>Supercharges physical motivation, eliminates self-doubt, and provides steady execution for major goals.</p>
+          </div>
+          <div class="info-box">
+            <h4>Mental Static, Indecision & Enhancing Focus</h4>
+            <p><strong>Primary:</strong> Lapis Lazuli • <strong>Support:</strong> Tiger's Eye, Black Tourmaline</p>
+            <p>Clears brain fog, grounds racing thoughts, and facilitates high-level strategic discernment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 3: QUICK-SCAN RESONANT CIRCUITS -->
+    <!-- ========================================================= -->
+    <section id="circuits" style="margin-bottom: 40px;">
+      <h2 class="section-title">⚡ 3. Quick-Scan Synergies by Shared Resonances</h2>
+      <p class="section-desc">The 4 primary energetic circuits that balance foundational intention across chakras.</p>
+
+      <div class="grid-2">
+        <div class="info-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h4 style="margin: 0;">The Grounding & Boundary Circuit</h4>
+            <button class="btn btn-test" onclick="loadSpecificTrio(['Black Onyx', 'Black Tourmaline', "Tiger's Eye"])">Analyze</button>
+          </div>
+          <p><strong>Resonances:</strong> [ROOT] + [SHIELD]</p>
+          <p><strong>Stones:</strong> Black Onyx + Black Tourmaline + Tiger's Eye</p>
+          <p>Anchors the root foundation while creating a dual inner/outer protective barrier with active confidence.</p>
+        </div>
+
+        <div class="info-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h4 style="margin: 0;">The Deep Catalyst & Clearing Circuit</h4>
+            <button class="btn btn-test" onclick="loadSpecificTrio(['Black Obsidian', 'Malachite', 'Black Tourmaline'])">Analyze</button>
+          </div>
+          <p><strong>Resonances:</strong> [SHADOW-WORK] + [ROOT]</p>
+          <p><strong>Stones:</strong> Black Obsidian + Malachite + Black Tourmaline</p>
+          <p>Unearths buried patterns and compels transformative heart-healing within a safe, grounded shield.</p>
+        </div>
+
+        <div class="info-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h4 style="margin: 0;">The Throat, Voice & Truth Circuit</h4>
+            <button class="btn btn-test" onclick="loadSpecificTrio(['Lapis Lazuli', 'Blue Turquoise', "Tiger's Eye"])">Analyze</button>
+          </div>
+          <p><strong>Resonances:</strong> [VOICE] + [INTUITION] / [HEART]</p>
+          <p><strong>Stones:</strong> Lapis Lazuli + Blue Turquoise + Tiger's Eye</p>
+          <p>Connects higher cosmic wisdom with diplomatic speech and confident, pragmatic daily execution.</p>
+        </div>
+
+        <div class="info-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h4 style="margin: 0;">The Primal Vitality & Drive Circuit</h4>
+            <button class="btn btn-test" onclick="loadSpecificTrio(['Red Coral', "Tiger's Eye", 'Black Onyx'])">Analyze</button>
+          </div>
+          <p><strong>Resonances:</strong> [VITALITY] + [WILLPOWER] + [ROOT]</p>
+          <p><strong>Stones:</strong> Red Coral + Tiger's Eye + Black Onyx</p>
+          <p>Ignites physical vitality (prana), focuses intention into willpower, and sustains disciplined follow-through.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 4: PRACTICAL WEARING DYNAMICS -->
+    <!-- ========================================================= -->
+    <section id="wrist-dynamics" style="margin-bottom: 40px;">
+      <h2 class="section-title">✋ 4. Practical Wearing Dynamics & Hand Guidelines</h2>
+      <p class="section-desc">Energy polarity dictates how gemstone frequencies interface with your aura depending on wrist placement.</p>
+
+      <div class="grid-2">
+        <div class="info-box" style="border-top: 4px solid #38BDF8;">
+          <h4>Left Hand (Receptive / Internal Side)</h4>
+          <p><strong>Primary Function:</strong> Absorbing energy inward for personal transformation, internal healing, and subconscious alignment.</p>
+          <p><strong>Best Suited For:</strong> Calming stress, emotional heart healing, intuitive development, and quiet meditation.</p>
+          <p><strong>Recommended Stones:</strong> Blue Turquoise (serenity), Malachite (heart healing), Lapis Lazuli (intuition), Red Coral (replenishing vitality).</p>
+        </div>
+
+        <div class="info-box" style="border-top: 4px solid #F59E0B;">
+          <h4>Right Hand (Projective / External Side)</h4>
+          <p><strong>Primary Function:</strong> Projecting energy outward into your environment, establishing boundaries, and manifesting action.</p>
+          <p><strong>Best Suited For:</strong> Shielding against external negativity/EMFs, public speaking, leadership, and taking decisive action.</p>
+          <p><strong>Recommended Stones:</strong> Black Tourmaline (EMF & psychic defense), Black Onyx (discipline), Tiger's Eye (courage & authority), Black Obsidian (deflection).</p>
+        </div>
+      </div>
+
+      <div class="info-box" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.3);">
+        <h4 style="color: #FBBF24;">⚖️ The 1:1 Black Stone Ratio (Rule of Thumb)</h4>
+        <p>For general daily wear, limit black root stones (Onyx, Tourmaline, Obsidian) to a maximum of <strong>one per trio</strong>. Reserve multi-black stacks exclusively for short-term cord-cutting or intense psychic defense. Pairing a single protective black stone with an uplifting, heart-centered, or communicative stone (such as Tiger's Eye, Blue Turquoise, or Lapis Lazuli) creates a versatile, harmonized daily stack.</p>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 5: CURATED TRIOS (30 STACKS) -->
+    <!-- ========================================================= -->
+    <section id="curated-catalog" style="margin-bottom: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <h2 class="section-title">✨ 5. Curated Practical Bracelet Trios & Energetic Synergies</h2>
+          <p class="section-desc">Complete 30-Stack Intentional Catalog. Click 'Analyze in Tool' on any stack to test it in the analyzer above.</p>
+        </div>
+        <input type="text" id="curatedSearchInput" class="search-input" placeholder="🔍 Search 30 curated stacks..." oninput="filterCuratedGrid()" style="max-width: 320px;">
+      </div>
+
+      <div class="catalog-grid" id="curatedGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 6: TRIOS TO AVOID (30 STACKS) -->
+    <!-- ========================================================= -->
+    <section id="avoid-catalog" style="margin-bottom: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <h2 class="section-title" style="color: #F87171;">⚠️ 6. Gemstone Bracelet Trios to Avoid & Energetic Incompatibilities</h2>
+          <p class="section-desc">Complete 30-Stack Catalog of energetic clashes. Click 'Analyze in Tool' on any stack to review symptoms and solutions.</p>
+        </div>
+        <input type="text" id="avoidSearchInput" class="search-input" placeholder="🔍 Search 30 avoid stacks..." oninput="filterAvoidGrid()" style="max-width: 320px;">
+      </div>
+
+      <div class="catalog-grid" id="avoidGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 7 & 8: RULES OF THUMB & MOHS HARDNESS -->
+    <!-- ========================================================= -->
+    <section id="mohs-rules">
+      <h2 class="section-title">🛡️ 7. Summary Rules of Thumb for Harmonious Stacking</h2>
+      <div class="grid-2" style="margin-bottom: 30px;">
+        <div class="info-box">
+          <h4>Rule 1: The 1:1 Black Stone Ratio</h4>
+          <p>Limit black/root stones (Onyx, Tourmaline, Obsidian) to a maximum of one per trio for daily wear. Reserve multi-black stacks exclusively for short-term cord-cutting or intense psychic defense to avoid apathy and heaviness.</p>
+        </div>
+        <div class="info-box">
+          <h4>Rule 2: Anchor the Higher Chakras</h4>
+          <p>Never stack multiple upper-chakra stones (Lapis Lazuli, Blue Turquoise) without at least one Root or Solar Plexus anchor (Onyx, Tourmaline, Tiger's Eye) to prevent empathic sensory overload, brain fog, and spaciness.</p>
+        </div>
+        <div class="info-box">
+          <h4>Rule 3: Buffer the Transformative Catalysts</h4>
+          <p>Whenever wearing aggressive shadow-work or emotional cleansers (Malachite, Black Obsidian), always include a soothing stone (Blue Turquoise) or a structured stabilizer (Black Onyx, Tiger's Eye) to prevent emotional turbulence.</p>
+        </div>
+        <div class="info-box">
+          <h4>Rule 4: Harmonize Elemental Vectors</h4>
+          <p>Avoid pulling the energy body in divergent vertical extremes simultaneously (e.g. raw sacral heat + intense heart catharsis + detached third-eye intellect) without an integrative heart/throat bridge (Turquoise) or grounding stabilizer.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">🔨 8. Physical Wear Considerations: Mohs Hardness Clashing</h2>
+      <p class="section-desc">Physical bead preservation table and real-time scratch risk calculator.</p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Gemstone</th>
+              <th>Mineral Family</th>
+              <th>Mohs Hardness</th>
+              <th>Durability Tier</th>
+              <th>Physical Characteristics & Vulnerabilities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Black Tourmaline</strong></td>
+              <td>Borosilicate (Schorl)</td>
+              <td><strong>7.0 – 7.5</strong></td>
+              <td><span style="color: #4ADE80; font-weight:700;">High (Durable)</span></td>
+              <td>Hard and highly resilient; can easily scratch softer stones (Coral, Malachite, Turquoise) upon contact.</td>
+            </tr>
+            <tr>
+              <td><strong>Black Onyx</strong></td>
+              <td>Chalcedony (Quartz)</td>
+              <td><strong>6.5 – 7.0</strong></td>
+              <td><span style="color: #4ADE80; font-weight:700;">High (Durable)</span></td>
+              <td>Tough cryptocrystalline structure; excellent everyday durability, resistant to scratches and household acids.</td>
+            </tr>
+            <tr>
+              <td><strong>Tiger’s Eye</strong></td>
+              <td>Macro-Quartz</td>
+              <td><strong>6.5 – 7.0</strong></td>
+              <td><span style="color: #4ADE80; font-weight:700;">High (Durable)</span></td>
+              <td>Dense fibrous quartz; chatoyant sheen is tough and scratch-resistant against casual daily friction.</td>
+            </tr>
+            <tr>
+              <td><strong>Blue Turquoise</strong></td>
+              <td>Hydrous Phosphate</td>
+              <td><strong>5.0 – 6.0</strong></td>
+              <td><span style="color: #FBBF24; font-weight:700;">Medium-Soft (Porous)</span></td>
+              <td>Porous structure; easily scratched by quartz/tourmaline. Absorbs oils, sweat, and perfumes, altering color.</td>
+            </tr>
+            <tr>
+              <td><strong>Black Obsidian</strong></td>
+              <td>Volcanic Silica Glass</td>
+              <td><strong>5.0 – 5.5</strong></td>
+              <td><span style="color: #FBBF24; font-weight:700;">Medium (Brittle)</span></td>
+              <td>Natural glass with conchoidal fracture; prone to edge chipping and micro-flaking when banged against hard beads.</td>
+            </tr>
+            <tr>
+              <td><strong>Lapis Lazuli</strong></td>
+              <td>Metamorphic Aggregate</td>
+              <td><strong>5.0 – 5.5</strong></td>
+              <td><span style="color: #FBBF24; font-weight:700;">Medium (Granular)</span></td>
+              <td>Composite mineral with soft calcite veins; vulnerable to scratching from harder stones and degraded by acids.</td>
+            </tr>
+            <tr>
+              <td><strong>Malachite</strong></td>
+              <td>Copper Carbonate</td>
+              <td><strong>3.5 – 4.0</strong></td>
+              <td><span style="color: #F87171; font-weight:700;">Soft (Fragile)</span></td>
+              <td>Very soft; easily scratched by dust and harder beads. Polish dulls rapidly with friction or water/sweat exposure.</td>
+            </tr>
+            <tr>
+              <td><strong>Red Coral</strong></td>
+              <td>Organic Calcium Carbonate</td>
+              <td><strong>3.0 – 4.0</strong></td>
+              <td><span style="color: #F87171; font-weight:700;">Softest (Fragile)</span></td>
+              <td>Organic skeleton; extremely soft and vulnerable to abrasions, scratches, perspiration, and acidic degradation.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Interactive Scratch Simulator -->
+      <div class="scratch-sim">
+        <h4 style="font-size: 1rem; font-weight: 700; color: #FBBF24; margin-bottom: 8px;">🔬 Interactive Bead-on-Bead Scratch Risk Simulator</h4>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">Select any two gemstones to test physical scratch vulnerability and bead abrasion risks:</p>
+        <div class="scratch-controls">
+          <select id="scratchStone1" class="select-stone" onchange="runScratchSimulator()"></select>
+          <span style="font-weight: 700; color: var(--text-sub);">VS</span>
+          <select id="scratchStone2" class="select-stone" onchange="runScratchSimulator()"></select>
+        </div>
+        <div class="scratch-result-box" id="scratchResultBox">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Gemstone Metaphysical & Spiritual Properties Guide • Interactive Edition</p>
+    <p style="margin-top: 4px; font-size: 0.72rem; color: #475569;">Compiled for Charles Williams • Curated Practical Synergies & Incompatibilities</p>
+  </footer>
+
+  <script>
+    // Embedded Data
+    const gemstones = [{"id": "black-onyx", "name": "Black Onyx", "chakra": "Root (Muladhara)", "chakraCategory": "Root", "element": "Earth", "theme": "Endurance & Self-Mastery", "tags": ["[ROOT]", "[SHIELD]", "[WILLPOWER]"], "sisterStones": [{"name": "Black Tourmaline", "role": "Shared Shielding \u2014 Deflects external chaos while Onyx contains internal emotion."}, {"name": "Tiger's Eye", "role": "Root & Willpower \u2014 Anchors active discipline into daily execution."}, {"name": "Red Coral", "role": "Root Grounding \u2014 Keeps vitality anchored without burnout."}], "properties": "Anchors personal willpower, absorbs and transforms negative energies, promotes spiritual discipline, and provides grounding stability during challenging phases.", "emotionalSupport": "Aids grief processing, tempers stress-induced reactivity, prevents emotional burnout, and strengthens daily focus.", "mohs": 6.75, "mohsRange": "6.5 \u2013 7.0", "tier": "High (Durable)", "mineralFamily": "Chalcedony (Quartz)", "color": "#1C1917", "textColor": "#F8FAFC", "accentColor": "#CA8A04", "isBlack": true, "vulnerabilities": "Tough cryptocrystalline structure; excellent everyday durability, resistant to scratches and household acids."}, {"id": "black-tourmaline", "name": "Black Tourmaline", "chakra": "Root (Muladhara)", "chakraCategory": "Root", "element": "Earth", "theme": "Shielding & Transmutation", "tags": ["[ROOT]", "[SHIELD]", "[SHADOW-WORK]"], "sisterStones": [{"name": "Black Onyx", "role": "Shared Shielding \u2014 Tourmaline transmutes stress; Onyx prevents emotional overwhelm."}, {"name": "Black Obsidian", "role": "Root & Clearing \u2014 Grounded container while Obsidian excavates blocks."}, {"name": "Tiger's Eye", "role": "Grounded Defense \u2014 Balances defense with active courage."}], "properties": "Premier psychic and environmental shield; double-terminated nature absorbs and transmutes negativity to positive energy; provides EMF protection.", "emotionalSupport": "Dissolves chronic worry and feelings of victimhood, clears mental fog, and provides rapid emotional stabilization.", "mohs": 7.25, "mohsRange": "7.0 \u2013 7.5", "tier": "High (Durable)", "mineralFamily": "Borosilicate (Schorl)", "color": "#27272A", "textColor": "#F8FAFC", "accentColor": "#38BDF8", "isBlack": true, "vulnerabilities": "Hard and highly resilient; can easily scratch softer stones (Coral, Malachite, Turquoise) upon contact."}, {"id": "black-obsidian", "name": "Black Obsidian", "chakra": "Root (Muladhara)", "chakraCategory": "Root", "element": "Fire & Earth (Volcanic)", "theme": "Truth & Shadow Integration", "tags": ["[ROOT]", "[SHADOW-WORK]"], "sisterStones": [{"name": "Malachite", "role": "Shared Shadow-Work \u2014 Obsidian reveals hidden blocks while Malachite compels heart growth."}, {"name": "Black Tourmaline", "role": "Root Defense \u2014 Absorbs energetic debris during cord-cutting."}, {"name": "Black Onyx", "role": "Containment \u2014 Delivers stamina during intense introspection."}], "properties": "Acts as a spiritual mirror, exposing root-level truths, cutting etheric cords, and clearing deeply buried subconscious blockages and energetic attachments.", "emotionalSupport": "Facilitates cathartic release of unresolved trauma, breaks negative illusions, and provides fierce protection during introspection.", "mohs": 5.25, "mohsRange": "5.0 \u2013 5.5", "tier": "Medium (Brittle)", "mineralFamily": "Volcanic Silica Glass", "color": "#0F0F11", "textColor": "#F8FAFC", "accentColor": "#C084FC", "isBlack": true, "vulnerabilities": "Natural glass with conchoidal fracture; prone to edge chipping and micro-flaking when banged against hard beads."}, {"id": "lapis-lazuli", "name": "Lapis Lazuli", "chakra": "Third Eye (Ajna) & Throat", "chakraCategory": "Third Eye", "element": "Water & Wind", "theme": "Inner Wisdom & Divine Truth", "tags": ["[VOICE]", "[INTUITION]"], "sisterStones": [{"name": "Blue Turquoise", "role": "Voice & Truth \u2014 Lapis activates higher truth while Turquoise softens with diplomacy."}, {"name": "Tiger's Eye", "role": "Mind-Action Bridge \u2014 Grounds visionary third-eye concepts into practical reality."}, {"name": "Black Tourmaline", "role": "Grounding Anchor \u2014 Anchors spiritual insight."}], "properties": "Stimulates visionary awareness, connects with higher spiritual wisdom, inspires intellectual clarity, and aligns speech with authentic inner truth.", "emotionalSupport": "Soothes throat chakra blockages, releases repressed anger, dispels intellectual confusion, and deepens meditative absorption.", "mohs": 5.25, "mohsRange": "5.0 \u2013 5.5", "tier": "Medium (Granular)", "mineralFamily": "Metamorphic Aggregate", "color": "#1E3A8A", "textColor": "#F8FAFC", "accentColor": "#F59E0B", "isBlack": false, "vulnerabilities": "Composite mineral with soft calcite veins; vulnerable to scratching from harder stones and degraded by acids."}, {"id": "blue-turquoise", "name": "Blue Turquoise", "chakra": "Throat (Vishuddha) & Heart", "chakraCategory": "Throat", "element": "Storm & Earth", "theme": "Wholeness & Master Healing", "tags": ["[VOICE]", "[HEART]", "[CALM]"], "sisterStones": [{"name": "Lapis Lazuli", "role": "Shared Voice \u2014 Harmonizes wisdom with compassionate, heartfelt speaking."}, {"name": "Malachite", "role": "Shared Heart Healing \u2014 Supplies gentle peace to balance emotional release."}, {"name": "Black Onyx", "role": "Root Boundary \u2014 Prevents absorbing others' stress."}], "properties": "Sacred protective talisman bridging heaven and earth; purifies the energy body, attracts serenity, and enhances honest, compassionate communication.", "emotionalSupport": "Eases mood swings, relieves stress and emotional exhaustion, promotes deep inner peace, and protects travelers.", "mohs": 5.5, "mohsRange": "5.0 \u2013 6.0", "tier": "Medium-Soft (Porous)", "mineralFamily": "Hydrous Phosphate", "color": "#0D9488", "textColor": "#F8FAFC", "accentColor": "#2DD4BF", "isBlack": false, "vulnerabilities": "Porous structure; easily scratched by quartz/tourmaline. Absorbs oils, sweat, and perfumes, altering color."}, {"id": "tigers-eye", "name": "Tiger's Eye", "chakra": "Solar Plexus (Manipura) & Root", "chakraCategory": "Solar Plexus", "element": "Fire & Earth", "theme": "Courage & Grounded Action", "tags": ["[ROOT]", "[WILLPOWER]"], "sisterStones": [{"name": "Black Onyx", "role": "Shared Willpower \u2014 Combines active courage with patient, structured perseverance."}, {"name": "Red Coral", "role": "Vitality & Drive \u2014 Harnesses primal life force into focused motivation."}, {"name": "Malachite", "role": "Solar-Heart Alignment \u2014 Translates breakthroughs into action."}], "properties": "Harmonizes solar fire with earth stability; balances yin/yang dualities, sharpens mental clarity and discernment, and fuels practical manifestation.", "emotionalSupport": "Overcomes self-doubt, fear, and indecision; boosts self-confidence; and provides steady composure in high-stakes settings.", "mohs": 6.75, "mohsRange": "6.5 \u2013 7.0", "tier": "High (Durable)", "mineralFamily": "Macro-Quartz", "color": "#B45309", "textColor": "#F8FAFC", "accentColor": "#FBBF24", "isBlack": false, "vulnerabilities": "Dense fibrous quartz; chatoyant sheen is tough and scratch-resistant against casual daily friction."}, {"id": "red-coral", "name": "Red Coral", "chakra": "Root & Sacral (Svadhisthana)", "chakraCategory": "Sacral", "element": "Water & Fire (Organic)", "theme": "Vitality & Life-Force Energy", "tags": ["[ROOT]", "[VITALITY]"], "sisterStones": [{"name": "Tiger's Eye", "role": "Action & Drive \u2014 Focuses raw creative vitality into strategic willpower."}, {"name": "Black Tourmaline", "role": "Root Defense \u2014 Shields reserves and prevents burnout during high exertion."}, {"name": "Blue Turquoise", "role": "Water Balance \u2014 Cools physical drive with emotional peace."}], "properties": "Stimulates core life-force (prana/chi), ignites creative passion, reconnects spirit to natural rhythms, and traditionally wards off the evil eye.", "emotionalSupport": "Combats apathy, physical exhaustion, and emotional inertia; restores motivation, enthusiasm, and bodily resilience.", "mohs": 3.5, "mohsRange": "3.0 \u2013 4.0", "tier": "Softest (Fragile)", "mineralFamily": "Organic Calcium Carbonate", "color": "#DC2626", "textColor": "#F8FAFC", "accentColor": "#F87171", "isBlack": false, "vulnerabilities": "Organic skeleton; extremely soft and vulnerable to abrasions, scratches, perspiration, and acidic degradation."}, {"id": "malachite", "name": "Malachite", "chakra": "Heart (Anahata) & Solar Plexus", "chakraCategory": "Heart", "element": "Earth & Fire", "theme": "Transformation & Cleansing", "tags": ["[HEART]", "[SHADOW-WORK]", "[WILLPOWER]"], "sisterStones": [{"name": "Black Obsidian", "role": "Shared Shadow-Work \u2014 Exposes buried grief and breaks obsolete patterns."}, {"name": "Blue Turquoise", "role": "Shared Heart Space \u2014 Offers a cooling balm so breakthroughs remain gentle."}, {"name": "Tiger's Eye", "role": "Shared Willpower \u2014 Supplies confidence for reinvention."}], "properties": "The 'Stone of Transformation'; powerfully draws out deeply rooted emotional blockages, clears energetic stagnation, and prompts radical personal evolution.", "emotionalSupport": "Aids recovery from emotional heartbreak, encourages healthy risk-taking, breaks obsolete behavioral patterns, and shields the heart.", "mohs": 3.75, "mohsRange": "3.5 \u2013 4.0", "tier": "Soft (Fragile)", "mineralFamily": "Copper Carbonate", "color": "#047857", "textColor": "#F8FAFC", "accentColor": "#34D399", "isBlack": false, "vulnerabilities": "Very soft; easily scratched by dust and harder beads. Polish dulls rapidly with friction or water/sweat exposure."}];
+    const curatedTrios = [{"id": "curated-1", "index": 1, "name": "The Empowered Protection Stack", "stones": "Black Tourmaline + Black Onyx + Tiger\u2019s Eye", "stonesList": ["Black Onyx", "Black Tourmaline", "Tiger's Eye"], "description": "<b>Complete defensive and grounding trio.</b> Tourmaline deflects external negativity and EMFs, Onyx builds internal self-discipline and stamina, and Tiger's Eye adds active confidence so protection feels empowered rather than reclusive."}, {"id": "curated-2", "index": 2, "name": "The Clear Communication & Wisdom Stack", "stones": "Lapis Lazuli + Blue Turquoise + Tiger\u2019s Eye", "stonesList": ["Blue Turquoise", "Lapis Lazuli", "Tiger's Eye"], "description": "<b>Harmonizes mind, voice, and execution.</b> Lapis Lazuli sparks intellectual vision and authentic truth, Turquoise opens the throat chakra with diplomatic calm, and Tiger's Eye anchors insights into pragmatic action."}, {"id": "curated-3", "index": 3, "name": "The Transformation & Emotional Renewal Stack", "stones": "Malachite + Blue Turquoise + Black Tourmaline", "stonesList": ["Black Tourmaline", "Blue Turquoise", "Malachite"], "description": "<b>Safe catalyst for life transitions.</b> Malachite uncovers and breaks obsolete emotional patterns, Turquoise soothes the heart space during emotional shifts, and Tourmaline creates a grounded energetic shield."}, {"id": "curated-4", "index": 4, "name": "The Vitality, Drive & Manifestation Stack", "stones": "Red Coral + Tiger\u2019s Eye + Black Onyx", "stonesList": ["Black Onyx", "Red Coral", "Tiger's Eye"], "description": "<b>Sustained willpower and productivity.</b> Red Coral ignites primal life force and passion, Tiger's Eye channels enthusiasm into sharp focus and courage, and Onyx provides structured perseverance to prevent burnout."}, {"id": "curated-5", "index": 5, "name": "The Truth, Shadow Work & Reset Stack", "stones": "Black Obsidian + Lapis Lazuli + Black Tourmaline", "stonesList": ["Black Obsidian", "Black Tourmaline", "Lapis Lazuli"], "description": "<b>Deep spiritual introspection.</b> Obsidian acts as a truth-telling mirror to cut toxic cords, Lapis Lazuli provides higher wisdom to integrate lessons without judgment, and Tourmaline anchors the root chakra."}, {"id": "curated-6", "index": 6, "name": "The Prosperity & Business Acumen Stack", "stones": "Malachite + Tiger\u2019s Eye + Black Onyx", "stonesList": ["Black Onyx", "Malachite", "Tiger's Eye"], "description": "<b>Commercial success and disciplined abundance.</b> Malachite clears scarcity mindsets and attracts transformative opportunities, Tiger's Eye sharpens business intuition and decision timing, and Onyx safeguards assets."}, {"id": "curated-7", "index": 7, "name": "The Stress Relief & Mental Serenity Stack", "stones": "Blue Turquoise + Black Onyx + Lapis Lazuli", "stonesList": ["Black Onyx", "Blue Turquoise", "Lapis Lazuli"], "description": "<b>De-escalates anxiety and nervous tension.</b> Turquoise cools turbulent feelings, Onyx absorbs physical tension and restless mental energy, and Lapis Lazuli declutters overthinking to restore philosophical calm."}, {"id": "curated-8", "index": 8, "name": "The Executive Leadership & Strategic Vision Stack", "stones": "Tiger\u2019s Eye + Malachite + Lapis Lazuli", "stonesList": ["Lapis Lazuli", "Malachite", "Tiger's Eye"], "description": "<b>Commanding presence and tactical clarity.</b> Lapis provides big-picture intellectual vision, Malachite empowers decisive leadership through corporate change, and Tiger's Eye ensures execution remains realistic and grounded."}, {"id": "curated-9", "index": 9, "name": "The Restorative Health & Burnout Recovery Stack", "stones": "Red Coral + Blue Turquoise + Black Tourmaline", "stonesList": ["Black Tourmaline", "Blue Turquoise", "Red Coral"], "description": "<b>Restores depleted physical reserves.</b> Red Coral stimulates circulation and vitality (prana), Turquoise brings holistic balance and soothing cellular renewal, and Tourmaline stops environmental energy drains."}, {"id": "curated-10", "index": 10, "name": "The Spiritual Discernment & Psychic Shielding Stack", "stones": "Lapis Lazuli + Blue Turquoise + Black Obsidian", "stonesList": ["Black Obsidian", "Blue Turquoise", "Lapis Lazuli"], "description": "<b>Deep meditation and psychic defense.</b> Lapis opens third-eye vision, Turquoise acts as a sacred energetic bridge between physical and spiritual realms, and Obsidian provides an impenetrable barrier against deception."}, {"id": "curated-11", "index": 11, "name": "The Creative Spark & Bold Action Stack", "stones": "Red Coral + Malachite + Tiger\u2019s Eye", "stonesList": ["Malachite", "Red Coral", "Tiger's Eye"], "description": "<b>Breaking creative ruts.</b> Red Coral ignites primal creative passion and playful enthusiasm, Malachite dissolves artistic resistance and self-doubt, and Tiger's Eye supplies the disciplined willpower to finish projects."}, {"id": "curated-12", "index": 12, "name": "The Safe Travel & Situational Awareness Stack", "stones": "Blue Turquoise + Red Coral + Tiger\u2019s Eye", "stonesList": ["Blue Turquoise", "Red Coral", "Tiger's Eye"], "description": "<b>Traditional traveler's amulet.</b> Turquoise guards against disorientation and travel mishaps, Red Coral maintains stamina against fatigue and jet lag, and Tiger's Eye keeps reflexes and situational instincts alert."}, {"id": "curated-13", "index": 13, "name": "The Crisis Management & Mental Fortitude Stack", "stones": "Black Obsidian + Black Onyx + Tiger\u2019s Eye", "stonesList": ["Black Obsidian", "Black Onyx", "Tiger's Eye"], "description": "<b>Unshakable emotional stoicism.</b> Obsidian unmasks hidden motives and cuts through deception, Onyx provides emotional containment under pressure, and Tiger's Eye brings calculated strategy and steady courage."}, {"id": "curated-14", "index": 14, "name": "The Gentle Healing & Emotional Replenishment Stack", "stones": "Black Obsidian + Blue Turquoise + Red Coral", "stonesList": ["Black Obsidian", "Blue Turquoise", "Red Coral"], "description": "<b>Deep emotional detox without depletion.</b> Obsidian excavates buried grief and subconscious blockages, Turquoise provides a soothing, compassionate heart balm, and Red Coral replenishes drained life-force (prana)."}, {"id": "curated-15", "index": 15, "name": "The Radical Self-Evolution & Higher Calling Stack", "stones": "Black Obsidian + Malachite + Lapis Lazuli", "stonesList": ["Black Obsidian", "Lapis Lazuli", "Malachite"], "description": "<b>Shadow work integration and metamorphosis.</b> Obsidian exposes subconscious shadow traits, Malachite compels the heart to evolve beyond old attachments, and Lapis Lazuli aligns transformation with higher truth."}, {"id": "curated-16", "index": 16, "name": "The Core Physical Endurance & Athletic Resilience Stack", "stones": "Red Coral + Black Tourmaline + Black Onyx", "stonesList": ["Black Onyx", "Black Tourmaline", "Red Coral"], "description": "<b>Sustained physical stamina.</b> Red Coral stimulates blood circulation and motor vitality, Tourmaline discharges physical tension and grounds bodily fatigue, and Onyx builds stamina and patient athletic discipline."}, {"id": "curated-17", "index": 17, "name": "The Relationship Boundaries & Empathetic Communication Stack", "stones": "Malachite + Blue Turquoise + Black Onyx", "stonesList": ["Black Onyx", "Blue Turquoise", "Malachite"], "description": "<b>Emotional openness with strong boundaries.</b> Malachite opens the heart to honest connection, Turquoise promotes gentle and empathetic dialogue, and Onyx ensures you do not absorb others' emotional turmoil."}, {"id": "curated-18", "index": 18, "name": "The Overcoming Fear & Shadow Empowerment Stack", "stones": "Black Obsidian + Malachite + Tiger\u2019s Eye", "stonesList": ["Black Obsidian", "Malachite", "Tiger's Eye"], "description": "<b>Conquering self-limiting beliefs.</b> Obsidian brings root fears and imposter syndrome to light, Malachite dissolves emotional resistance, and Tiger's Eye instills bold confidence and assertiveness to act."}, {"id": "curated-19", "index": 19, "name": "The Grounded Creative Intuition & Artistic Shielding Stack", "stones": "Lapis Lazuli + Red Coral + Black Tourmaline", "stonesList": ["Black Tourmaline", "Lapis Lazuli", "Red Coral"], "description": "<b>Inspired expression and artistic protection.</b> Lapis opens visionary intuition, Red Coral translates ideas into tangible creative output, and Tourmaline shields the sensitive creator from cynicism and criticism."}, {"id": "curated-20", "index": 20, "name": "The Holistic Chakral Alignment & Mind-Body-Voice Harmony Stack", "stones": "Red Coral + Blue Turquoise + Lapis Lazuli", "stonesList": ["Blue Turquoise", "Lapis Lazuli", "Red Coral"], "description": "<b>Complete energy bridge from root to third eye.</b> Red Coral anchors physical vitality, Turquoise balances the heart and throat with serene peace, and Lapis Lazuli aligns speech and intellect with higher wisdom."}, {"id": "curated-21", "index": 21, "name": "The Scholarly Architect Stack (Deep Focus & Study)", "stones": "Black Onyx + Lapis Lazuli + Tiger\u2019s Eye", "stonesList": ["Black Onyx", "Lapis Lazuli", "Tiger's Eye"], "description": "<b>Cognitive endurance and disciplined deep study.</b> Lapis Lazuli expands mental capacity and memory, Black Onyx provides steady mental stamina, and Tiger's Eye sharpens analytical discernment for complex execution."}, {"id": "curated-22", "index": 22, "name": "The Serene Empath Shield (Spiritual Grounding & Calm)", "stones": "Black Tourmaline + Blue Turquoise + Lapis Lazuli", "stonesList": ["Black Tourmaline", "Blue Turquoise", "Lapis Lazuli"], "description": "<b>Balanced psychic defense and intuitive serenity.</b> Lapis Lazuli elevates spiritual perception, Blue Turquoise soothes the nervous system, and Black Tourmaline anchors the root to deflect ambient negativity."}, {"id": "curated-23", "index": 23, "name": "The Benevolent Sovereign Stack (Heart-Centered Leadership)", "stones": "Blue Turquoise + Malachite + Tiger\u2019s Eye", "stonesList": ["Blue Turquoise", "Malachite", "Tiger's Eye"], "description": "<b>Heart-centered leadership and ethical growth.</b> Malachite dissolves scarcity beliefs and invites growth, Tiger's Eye supplies strategic confidence and business acumen, and Blue Turquoise ensures compassionate communication."}, {"id": "curated-24", "index": 24, "name": "The Primal Endurance Circuit (Physical Vitality & Workouts)", "stones": "Black Tourmaline + Red Coral + Tiger\u2019s Eye", "stonesList": ["Black Tourmaline", "Red Coral", "Tiger's Eye"], "description": "<b>High-output physical stamina and athletic motivation.</b> Red Coral supercharges physical vitality (prana), Tiger's Eye focuses drive into disciplined routine, and Black Tourmaline grounds fatigue to prevent burnout."}, {"id": "curated-25", "index": 25, "name": "The Empowered Heart Shield (Boundaries & Vulnerability)", "stones": "Black Onyx + Blue Turquoise + Tiger\u2019s Eye", "stonesList": ["Black Onyx", "Blue Turquoise", "Tiger's Eye"], "description": "<b>Confident emotional boundaries and vulnerability.</b> Blue Turquoise opens the heart for honest dialogue, Black Onyx stops absorption of others' turmoil, and Tiger's Eye instills confidence to set healthy limits without guilt."}, {"id": "curated-26", "index": 26, "name": "The Tactical Visionary Stack (High-Stakes Strategy)", "stones": "Black Tourmaline + Lapis Lazuli + Tiger\u2019s Eye", "stonesList": ["Black Tourmaline", "Lapis Lazuli", "Tiger's Eye"], "description": "<b>Executive milestone execution and strategic foresight.</b> Lapis Lazuli provides 30,000-foot intellectual clarity, Tiger's Eye translates goals into tactical daily milestones, and Black Tourmaline grounds mental static under pressure."}, {"id": "curated-27", "index": 27, "name": "The Deep Restoration Balm (Convalescence & Recovery)", "stones": "Blue Turquoise + Malachite + Red Coral", "stonesList": ["Blue Turquoise", "Malachite", "Red Coral"], "description": "<b>Cellular convalescence and holistic recovery.</b> Malachite draws out buried emotional exhaustion, Blue Turquoise infuses a cooling master-healing frequency, and Red Coral rebuilds depleted life-force (chi) after burnout."}, {"id": "curated-28", "index": 28, "name": "The Gentle Crucible Stack (Buffered Shadow Healing)", "stones": "Black Obsidian + Blue Turquoise + Malachite", "stonesList": ["Black Obsidian", "Blue Turquoise", "Malachite"], "description": "<b>Safe shadow integration and metamorphosis.</b> Black Obsidian severs toxic cords and exposes subconscious patterns, Malachite prompts heart evolution, and Blue Turquoise buffers catharsis to keep release gentle."}, {"id": "curated-29", "index": 29, "name": "The Inspired Muse Stack (Creative Drive & Artistry)", "stones": "Lapis Lazuli + Red Coral + Tiger\u2019s Eye", "stonesList": ["Lapis Lazuli", "Red Coral", "Tiger's Eye"], "description": "<b>Creative breakthrough and artistic manifestation.</b> Lapis Lazuli accesses intuitive visionary inspiration, Red Coral ignites creative spark and enthusiasm, and Tiger's Eye provides disciplined willpower to finish projects."}, {"id": "curated-30", "index": 30, "name": "The Grounded Sanctuary Stack (Nervous System Regulation)", "stones": "Black Onyx + Blue Turquoise + Red Coral", "stonesList": ["Black Onyx", "Blue Turquoise", "Red Coral"], "description": "<b>Nervous system regulation and stress containment.</b> Blue Turquoise cools racing thoughts and chest tightness, Red Coral maintains healthy baseline vitality, and Black Onyx creates an immovable stoic anchor against anxiety."}];
+    const avoidTrios = [{"id": "avoid-1", "index": 1, "name": "The Dense Void / All-Black Deprivation Stack", "stones": "Black Onyx + Black Tourmaline + Black Obsidian", "stonesList": ["Black Obsidian", "Black Onyx", "Black Tourmaline"], "conflict": "Triple Root Chakra / Triple Earth-Fire Compression.", "symptoms": "Chronic lethargy, emotional heaviness, feeling isolated, and mental fatigue from auric vacuuming.", "fix": "Replace two black stones with uplifting or heart-opening stones like Tiger's Eye and Blue Turquoise."}, {"id": "avoid-2", "index": 2, "name": "The 'Hyper-Defensive / Fortress' Stack", "stones": "Black Obsidian + Black Onyx + Red Coral", "stonesList": ["Black Obsidian", "Black Onyx", "Red Coral"], "conflict": "Root + Sacral / Volcanic Fire + Earth + Primal Life-Force.", "symptoms": "Hyper-vigilance, social mistrust, emotional coldness, defensive irritability, and feeling under constant siege.", "fix": "Swap Obsidian or Onyx for Blue Turquoise or Tiger's Eye to soften defenses with warmth and diplomatic communication."}, {"id": "avoid-3", "index": 3, "name": "The 'Brake & Accelerator' Sleep Clash (Bedtime Wear)", "stones": "Tiger's Eye + Red Coral + Malachite", "stonesList": ["Malachite", "Red Coral", "Tiger's Eye"], "conflict": "Solar Plexus + Sacral + Heart / Dual Fire + Active Earth (Circadian Rest Mismatch).", "symptoms": "Night-time restlessness, racing thoughts, difficulty falling asleep, vivid/chaotic dreams, and morning exhaustion.", "fix": "Remove before bed. Wear gentle, cooling stones at night (like Blue Turquoise), and reserve this stack for active daytime output."}, {"id": "avoid-4", "index": 4, "name": "The 'Ungrounded Visionary' Stack", "stones": "Lapis Lazuli + Blue Turquoise + Malachite (Without Root Anchor)", "stonesList": ["Blue Turquoise", "Lapis Lazuli", "Malachite"], "conflict": "Third Eye + Throat + Heart/Solar (Zero Root / Earth Grounding).", "symptoms": "Feeling spacey, chronic daydreaming without execution, mental fatigue, empathic sensory overload, and unfinished tasks.", "fix": "Swap Malachite or Lapis Lazuli for a grounding anchor like Black Onyx or Black Tourmaline to tether higher vision into reality."}, {"id": "avoid-5", "index": 5, "name": "The Emotional Volcanic Tempest", "stones": "Black Obsidian + Malachite + Red Coral", "stonesList": ["Black Obsidian", "Malachite", "Red Coral"], "conflict": "Root + Heart/Solar + Sacral / Volcanic Fire + Primal Fire.", "symptoms": "Sudden emotional flooding, panic, irritability spikes, and unearthing grief without containment.", "fix": "Replace Red Coral with Blue Turquoise to soothe the heart space and calm volcanic unearthing."}, {"id": "avoid-6", "index": 6, "name": "The Polar Whiplash / Energetic Vertigo Stack", "stones": "Black Obsidian + Lapis Lazuli + Red Coral", "stonesList": ["Black Obsidian", "Lapis Lazuli", "Red Coral"], "conflict": "Root/Shadow + Third Eye + Sacral / Extreme Vertical Polarity.", "symptoms": "Feeling mentally scattered, energetic 'vertigo,' dissociation, and ungrounded physical restlessness.", "fix": "Swap Obsidian for Black Tourmaline or add a throat/heart bridge like Blue Turquoise to unify the poles."}, {"id": "avoid-7", "index": 7, "name": "The Heavy Suppression / Muted Throat Stack", "stones": "Black Onyx + Black Obsidian + Blue Turquoise", "stonesList": ["Black Obsidian", "Black Onyx", "Blue Turquoise"], "conflict": "Dual Heavy Root Containment vs. Delicate Throat-Heart Water.", "symptoms": "Feeling tongue-tied, social withdrawal, emotional numbness, and difficulty expressing vulnerability.", "fix": "Keep only one black stone (Onyx) and add Lapis Lazuli for balanced vocal clarity and confidence."}, {"id": "avoid-8", "index": 8, "name": "The Primal Ego & Suspicion Stack", "stones": "Black Obsidian + Tiger's Eye + Red Coral", "stonesList": ["Black Obsidian", "Red Coral", "Tiger's Eye"], "conflict": "Shadow Truth + Solar Willpower + Sacral Fire.", "symptoms": "Hyper-defensiveness, paranoia, impatience, short tempers, and aggressive interpersonal friction.", "fix": "Swap Black Obsidian for Black Onyx to instill patient stoicism and disciplined execution."}, {"id": "avoid-9", "index": 9, "name": "The Constricted Heart Pressure Cooker Stack", "stones": "Black Onyx + Black Tourmaline + Malachite", "stonesList": ["Black Onyx", "Black Tourmaline", "Malachite"], "conflict": "Dual External/Internal Shields vs. Dynamic Heart Catalyst.", "symptoms": "Chest tightness, internalized brooding, stubborn resentment, and inability to release processed grief.", "fix": "Replace Black Tourmaline with Blue Turquoise to provide a gentle, compassionate emotional outlet."}, {"id": "avoid-10", "index": 10, "name": "The Melancholic Abyss / Dark Night Stack", "stones": "Black Onyx + Black Obsidian + Lapis Lazuli", "stonesList": ["Black Obsidian", "Black Onyx", "Lapis Lazuli"], "conflict": "Dual Heavy Shadow/Containment Stones vs. Third-Eye Divine Truth.", "symptoms": "Dark philosophical rumination, cynicism, existential gloom, and hyper-critical perfectionism.", "fix": "Replace Black Onyx with Tiger's Eye to infuse the intellectual vision with warmth and solar courage."}, {"id": "avoid-11", "index": 11, "name": "The Trapped Internal Combustion Stack", "stones": "Black Tourmaline + Black Obsidian + Red Coral", "stonesList": ["Black Obsidian", "Black Tourmaline", "Red Coral"], "conflict": "Volcanic Fire + Primal Life-Force trapped within an Electrical Shield.", "symptoms": "Physical restlessness, muscle twitching, night-time insomnia, and pent-up kinetic agitation.", "fix": "Swap Black Obsidian for Tiger's Eye to channel primal stamina into structured action."}, {"id": "avoid-12", "index": 12, "name": "The Erratic Mind-Heart Tug-of-War Stack", "stones": "Lapis Lazuli + Red Coral + Malachite", "stonesList": ["Lapis Lazuli", "Malachite", "Red Coral"], "conflict": "Detached Third-Eye Wind vs. Primal Sacral Fire vs. Turbulent Heart Earth.", "symptoms": "Rapid oscillations between cold intellectual detachment and intense emotional outbursts.", "fix": "Replace Lapis Lazuli with Tiger's Eye to unite heart transformation with grounded physical drive."}, {"id": "avoid-13", "index": 13, "name": "The Double-Damped Throat Stack", "stones": "Black Onyx + Black Tourmaline + Blue Turquoise", "stonesList": ["Black Onyx", "Black Tourmaline", "Blue Turquoise"], "conflict": "Dual Heavy Earth Gravity vs. Delicate Water-Storm Throat Expression.", "symptoms": "Hesitation to speak up, social exhaustion, feeling energetically muffled, and flat vocal tone.", "fix": "Pair Blue Turquoise with just one protective stone and an expressive partner like Lapis Lazuli."}, {"id": "avoid-14", "index": 14, "name": "The 'Subconscious Pressure Cooker' Stack", "stones": "Black Obsidian + Black Tourmaline + Malachite", "stonesList": ["Black Obsidian", "Black Tourmaline", "Malachite"], "conflict": "Dual Root (Earth/Fire) + Heart/Solar (Earth/Fire) (Zero Upper-Chakra Release Valve).", "symptoms": "Severe internal emotional pressure, unexplained irritability, chest heaviness, brooding over grievances, and defensive outbursts.", "fix": "Replace Black Obsidian with Blue Turquoise to provide a soothing gentle heart balm that allows emotional processing without pressure."}, {"id": "avoid-15", "index": 15, "name": "The 'Rigid Shadow Gridlock' Stack", "stones": "Black Obsidian + Black Onyx + Malachite", "stonesList": ["Black Obsidian", "Black Onyx", "Malachite"], "conflict": "Dual Root (Earth/Fire) + Heart/Solar (Earth/Fire) (Raw Exposure vs. Rigid Stoic Suppression).", "symptoms": "Emotional numbness alternating with intense frustration, stubborn jaw clenching, feelings of entrapment, and cynical withdrawal.", "fix": "Replace Black Onyx with Tiger's Eye or Blue Turquoise to soften defenses and encourage flexible, courageous heart expression."}, {"id": "avoid-16", "index": 16, "name": "The 'Stifled Passion & Frustration' Stack", "stones": "Black Onyx + Malachite + Red Coral", "stonesList": ["Black Onyx", "Malachite", "Red Coral"], "conflict": "Root (Earth) + Heart/Solar (Earth/Fire) + Sacral/Root (Water/Fire) (Vitality Smothered by Cold Earth).", "symptoms": "Intense creative/romantic frustration, resentment, feeling emotionally inhibited, sluggish sacral energy, and passive aggression.", "fix": "Swap Black Onyx for Tiger's Eye to channel passionate emotional energy into constructive manifestation rather than suppressing it."}, {"id": "avoid-17", "index": 17, "name": "The 'Suffocated Voice' Stack", "stones": "Black Obsidian + Black Tourmaline + Blue Turquoise", "stonesList": ["Black Obsidian", "Black Tourmaline", "Blue Turquoise"], "conflict": "Dual Heavy Root (Earth/Fire) vs. Throat/Heart (Storm/Earth) (Throat Frequency Crushed by Dual Shields).", "symptoms": "Social anxiety, feeling energetically weighed down, difficulty speaking in meetings, vocal fatigue, and throat constriction.", "fix": "Drop Black Obsidian and replace it with Lapis Lazuli to create an expressive, balanced bridge between protection and vocal confidence."}, {"id": "avoid-18", "index": 18, "name": "The 'Intellect vs. Heart Dissociation' Stack", "stones": "Black Tourmaline + Lapis Lazuli + Malachite", "stonesList": ["Black Tourmaline", "Lapis Lazuli", "Malachite"], "conflict": "Root (Earth) + Third Eye (Wind/Water) + Heart (Earth/Fire) (Detached Logic vs. Raw Emotional Churning).", "symptoms": "Over-rationalizing emotional pain, cognitive dissonance, cold mental detachment followed by sudden mood crashes, and decision paralysis.", "fix": "Replace Lapis Lazuli with Blue Turquoise to unite the throat and heart, fostering empathetic communication rather than detachment."}, {"id": "avoid-19", "index": 19, "name": "The 'Primal-Spiritual Split' Stack", "stones": "Black Onyx + Lapis Lazuli + Red Coral", "stonesList": ["Black Onyx", "Lapis Lazuli", "Red Coral"], "conflict": "Root (Earth) + Third Eye (Wind/Water) + Sacral (Water/Fire) (Extreme Vertical Polarity, Zero Heart Bridge).", "symptoms": "Feeling fragmented between animal instincts and rigid spiritual ideals, guilt regarding physical desires, and erratic energy spikes/crashes.", "fix": "Replace Black Onyx with Blue Turquoise to build an emotional heart bridge that harmonizes instinctual vitality with higher mental vision."}, {"id": "avoid-20", "index": 20, "name": "The 'Turbulent Somatic Agitation' Stack", "stones": "Black Tourmaline + Malachite + Red Coral", "stonesList": ["Black Tourmaline", "Malachite", "Red Coral"], "conflict": "Root (Earth) + Heart (Earth/Fire) + Sacral (Water/Fire) (High Motor Drive Paired with Subconscious Churning).", "symptoms": "Restless nervous energy, fluttery heart sensations during stress, impulsive reactions, muscle tension, and evening insomnia.", "fix": "Swap Malachite for Tiger's Eye to stabilize physical drive with grounded willpower and composed focus, avoiding emotional volatility."}, {"id": "avoid-21", "index": 21, "name": "The 'Rigid Will vs. Vulnerability' Clash", "stones": "Black Onyx + Tiger\u2019s Eye + Malachite", "stonesList": ["Black Onyx", "Malachite", "Tiger's Eye"], "conflict": "Root (Saturn/Earth) + Solar Plexus Fire + Heart (Venus/Earth-Fire). Stoic wall & ambition vs. raw heart catharsis.", "symptoms": "Hyper-defensive reactions, sudden bitter resentment, chest tightness during meetings, inability to lower guard.", "fix": "Swap Black Onyx for Blue Turquoise to soften solar drive and communicate emotional insights gently."}, {"id": "avoid-22", "index": 22, "name": "The 'Dogmatic Realist / Tunnel Vision' Stack", "stones": "Black Onyx + Tiger\u2019s Eye + Lapis Lazuli", "stonesList": ["Black Onyx", "Lapis Lazuli", "Tiger's Eye"], "conflict": "Heavy Earth/Saturn + Solar Plexus Fire vs. Wind-Water Third Eye. Lower pragmatic ego clamping down on cosmic vision.", "symptoms": "Intellectual arrogance, cynical dismissal of gut feelings, chronic fatigue from micromanaging logistics, stiff neck.", "fix": "Swap Black Onyx for Blue Turquoise to bridge vision and speech, or swap Lapis for Red Coral for grounded action."}, {"id": "avoid-23", "index": 23, "name": "The 'Hyper-Combative / Defensive Aggression' Stack", "stones": "Black Tourmaline + Tiger\u2019s Eye + Red Coral", "stonesList": ["Black Tourmaline", "Red Coral", "Tiger's Eye"], "conflict": "Root (Dense Shield) + Solar Plexus Fire + Sacral-Root Primal Fire. Trapped dual martial heat behind heavy shield.", "symptoms": "Road rage, chronic hyper-reactivity, assuming hostility in casual remarks, jaw-clenching, adrenaline surges.", "fix": "Swap Red Coral for Blue Turquoise to introduce cooling, compassionate energy that soothes martial irritability."}, {"id": "avoid-24", "index": 24, "name": "The 'Muzzled Passion / Cold Shock' Stack", "stones": "Black Tourmaline + Blue Turquoise + Red Coral", "stonesList": ["Black Tourmaline", "Blue Turquoise", "Red Coral"], "conflict": "Dense Earth (Root) + Throat Storm-Water + Sacral Fire-Water. Urgent primal vitality quenched by heavy electrical grounding.", "symptoms": "Creatively blocked and emotionally muted yet privately simmering, passive-aggressive remarks, lower pelvic heaviness.", "fix": "Swap Black Tourmaline for Tiger's Eye to channel passion into confident leadership without cold suppression."}, {"id": "avoid-25", "index": 25, "name": "The 'Impulsive Provocateur / Fire-Water Whiplash' Stack", "stones": "Tiger\u2019s Eye + Blue Turquoise + Red Coral", "stonesList": ["Blue Turquoise", "Red Coral", "Tiger's Eye"], "conflict": "Solar Plexus Fire + Sacral Fire overwhelming delicate Throat Water. Kinetic charge forcing speech before contemplation.", "symptoms": "Speaking impulsively before thinking, blunt insensitivity that damages bonds, vocal strain, remorse over hasty speech.", "fix": "Swap Red Coral for Black Tourmaline or Onyx to anchor fiery impulses into measured, tactful communication."}, {"id": "avoid-26", "index": 26, "name": "The 'Fanatical Zealot / Ego-Spiritual Overdrive' Stack", "stones": "Tiger\u2019s Eye + Lapis Lazuli + Red Coral", "stonesList": ["Lapis Lazuli", "Red Coral", "Tiger's Eye"], "conflict": "Solar Plexus (Sun-Mars) + Third Eye (Vision) + Sacral-Root Primal Fire. Martial heat and ego co-opting unanchored mystical downloads.", "symptoms": "Dogmatic preaching, righteous indignation, messiah complex tendencies, intolerance of opposing views, adrenal crash.", "fix": "Swap Red Coral for Black Tourmaline to ground spiritual vision into steady, humble daily discipline."}, {"id": "avoid-27", "index": 27, "name": "The 'Exposed Nerve / Raw Vulnerability' Stack", "stones": "Black Obsidian + Blue Turquoise + Red Coral", "stonesList": ["Black Obsidian", "Blue Turquoise", "Red Coral"], "conflict": "Pluto Shadow Dredging + Sensitive Throat Water + Mars Visceral Arousal. Deep trauma unearthing without dense containment.", "symptoms": "Acute emotional fragility, sudden weeping spells, panic in crowds, lump in the throat, feeling emotionally skinless.", "fix": "Swap Black Obsidian for Black Tourmaline for protective filtering, or replace Coral with Onyx for strong container walls."}, {"id": "avoid-28", "index": 28, "name": "The 'Friction-Locked Catalyst' Stack", "stones": "Black Tourmaline + Tiger\u2019s Eye + Malachite", "stonesList": ["Black Tourmaline", "Malachite", "Tiger's Eye"], "conflict": "Saturn Grounding Absorption vs. Solar Ego Control vs. Deep Heart Catharsis. Engine revving while emergency brake is locked.", "symptoms": "Intense internal friction, mid-back spasms, chronic indigestion, clinging to rigid habits despite desiring change.", "fix": "Swap Black Tourmaline for Blue Turquoise to allow emotional breakthroughs to be processed and voiced with empathy."}, {"id": "avoid-29", "index": 29, "name": "The 'Stifled Diplomat / Micromanagement' Stack", "stones": "Black Onyx + Tiger\u2019s Eye + Blue Turquoise", "stonesList": ["Black Onyx", "Blue Turquoise", "Tiger's Eye"], "conflict": "Rigid Saturnian Containment + Solar Control vs. Fluid Throat Expression. Calculating discipline choking genuine empathetic flow.", "symptoms": "Overly transactional conversational tone, inability to listen empathetically, micromanagement, chronic dry throat.", "fix": "Swap Black Onyx for Lapis Lazuli to elevate ambition into strategic wisdom, or swap Tiger's Eye for Malachite."}, {"id": "avoid-30", "index": 30, "name": "The 'Paralyzing Paranoia / Shadow Over-Analysis' Stack", "stones": "Black Obsidian + Tiger\u2019s Eye + Lapis Lazuli", "stonesList": ["Black Obsidian", "Lapis Lazuli", "Tiger's Eye"], "conflict": "Root Pluto Shadow Dredging + Solar Vigilance + Third Eye Pattern Recognition. Distortion of high intuition into threat paranoia.", "symptoms": "Over-analyzing micro-expressions, worst-case scenario obsession, racing insomnia, ungrounded suspicion of allies.", "fix": "Swap Black Obsidian for Black Tourmaline to protect the aura without activating latent paranoia or trauma."}];
+
+    let selectedStones = [];
+    let currentChakraFilter = 'ALL';
+
+    // Normalize stone names helper
+    function normalizeName(name) {
+      return name.trim().replace(/’/g, "'").replace(/\(.*?\)/g, '').trim();
+    }
+
+    // Initialize UI
+    document.addEventListener('DOMContentLoaded', () => {
+      renderStoneSelector();
+      renderMasterTable();
+      renderCuratedGrid();
+      renderAvoidGrid();
+      initScratchSimulator();
+    });
+
+    // =========================================================
+    // TRIO SELECTOR & ANALYZER LOGIC
+    // =========================================================
+    function renderStoneSelector() {
+      const grid = document.getElementById('stoneSelectorGrid');
+      grid.innerHTML = '';
+
+      gemstones.forEach(stone => {
+        const isSelected = selectedStones.includes(stone.name);
+        const card = document.createElement('div');
+        card.className = `stone-chip ${isSelected ? 'selected' : ''}`;
+        card.onclick = () => toggleStoneSelection(stone.name);
+
+        card.innerHTML = `
+          <div class="stone-chip-checkbox">✓</div>
+          <div class="bead-preview" style="background: ${stone.color}; border: 1px solid ${stone.accentColor};"></div>
+          <div class="stone-chip-name">${stone.name}</div>
+          <div class="stone-chip-meta">${stone.chakraCategory} • ${stone.element}</div>
+          <div class="stone-chip-meta" style="color: ${stone.tier.includes('High') ? '#4ADE80' : stone.tier.includes('Medium') ? '#FBBF24' : '#F87171'}">Mohs ${stone.mohsRange}</div>
+        `;
+        grid.appendChild(card);
+      });
+
+      updateBraceletDock();
+    }
+
+    function toggleStoneSelection(stoneName) {
+      const idx = selectedStones.indexOf(stoneName);
+      if (idx > -1) {
+        selectedStones.splice(idx, 1);
+      } else {
+        if (selectedStones.length >= 3) {
+          // If already 3, replace the oldest one or alert
+          selectedStones.shift();
+        }
+        selectedStones.push(stoneName);
+      }
+
+      renderStoneSelector();
+      evaluateSelectedTrio();
+    }
+
+    function updateBraceletDock() {
+      const countBadge = document.getElementById('selectionCountBadge');
+      countBadge.innerText = `${selectedStones.length} / 3 Selected`;
+
+      for (let i = 0; i < 3; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        if (selectedStones[i]) {
+          const stone = gemstones.find(g => g.name === selectedStones[i]);
+          slot.className = 'dock-slot filled';
+          slot.innerHTML = `
+            <div class="dock-bead" style="background: ${stone.color}; border: 1px solid ${stone.accentColor};"></div>
+            <span>${stone.name}</span>
+          `;
+        } else {
+          slot.className = 'dock-slot';
+          slot.innerHTML = `
+            <div class="dock-bead">${i + 1}</div>
+            <span>Select Stone</span>
+          `;
+        }
+      }
+    }
+
+    function clearSelection() {
+      selectedStones = [];
+      renderStoneSelector();
+      document.getElementById('analyzerResultsBox').style.display = 'none';
+    }
+
+    function loadSpecificTrio(stonesArray) {
+      selectedStones = [...stonesArray];
+      renderStoneSelector();
+      evaluateSelectedTrio();
+      document.getElementById('analyzer').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function loadRandomGoodTrio() {
+      const rand = curatedTrios[Math.floor(Math.random() * curatedTrios.length)];
+      loadSpecificTrio(rand.stonesList);
+    }
+
+    function loadRandomAvoidTrio() {
+      const rand = avoidTrios[Math.floor(Math.random() * avoidTrios.length)];
+      loadSpecificTrio(rand.stonesList);
+    }
+
+    function loadContextualTrio() {
+      // Find a trio that is in both
+      const contextualList = [
+        ["Black Onyx", "Blue Turquoise", "Tiger's Eye"],
+        ["Red Coral", "Blue Turquoise", "Tiger's Eye"],
+        ["Red Coral", "Black Tourmaline", "Tiger's Eye"],
+        ["Red Coral", "Malachite", "Tiger's Eye"],
+        ["Black Onyx", "Malachite", "Tiger's Eye"],
+        ["Black Onyx", "Lapis Lazuli", "Tiger's Eye"]
+      ];
+      const rand = contextualList[Math.floor(Math.random() * contextualList.length)];
+      loadSpecificTrio(rand);
+    }
+
+    // The Main Evaluation Function
+    function evaluateSelectedTrio() {
+      const box = document.getElementById('analyzerResultsBox');
+      if (selectedStones.length < 3) {
+        box.style.display = 'none';
+        return;
+      }
+
+      box.style.display = 'block';
+
+      // Find match in curated
+      const curMatch = curatedTrios.find(c => {
+        const setA = new Set(c.stonesList.map(normalizeName));
+        return selectedStones.every(s => setA.has(normalizeName(s)));
+      });
+
+      // Find match in avoid
+      const avoidMatch = avoidTrios.find(a => {
+        const setA = new Set(a.stonesList.map(normalizeName));
+        return selectedStones.every(s => setA.has(normalizeName(s)));
+      });
+
+      // Mohs Hardness Calculation
+      const selStoneObjects = selectedStones.map(name => gemstones.find(g => g.name === name));
+      const mohsVals = selStoneObjects.map(s => s.mohs);
+      const minMohs = Math.min(...mohsVals);
+      const maxMohs = Math.max(...mohsVals);
+      const deltaMohs = (maxMohs - minMohs).toFixed(1);
+
+      const softestStone = selStoneObjects.find(s => s.mohs === minMohs);
+      const hardestStone = selStoneObjects.find(s => s.mohs === maxMohs);
+
+      let wearHazardHtml = "";
+      if (deltaMohs >= 3.0) {
+        wearHazardHtml = `
+          <div class="mohs-row">
+            <span>Hardness Range:</span>
+            <span>${minMohs.toFixed(1)} – ${maxMohs.toFixed(1)} (Δ ${deltaMohs})</span>
+          </div>
+          <div class="mohs-row">
+            <span>Abrasion Hazard:</span>
+            <span class="mohs-delta-badge delta-high">⚠️ Severe Abrasion Clash</span>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.76rem; color: #FECACA;">
+            <strong>Warning:</strong> Direct contact between <strong>${hardestStone.name} (${hardestStone.mohsRange})</strong> and <strong>${softestStone.name} (${softestStone.mohsRange})</strong> will cause rapid scratching and irreversible loss of polish.
+            <br/><em>Action:</em> Insert silicone o-rings/leather spacers between beads, or split stones between wrists.
+          </p>
+        `;
+      } else if (deltaMohs >= 1.5) {
+        wearHazardHtml = `
+          <div class="mohs-row">
+            <span>Hardness Range:</span>
+            <span>${minMohs.toFixed(1)} – ${maxMohs.toFixed(1)} (Δ ${deltaMohs})</span>
+          </div>
+          <div class="mohs-row">
+            <span>Abrasion Hazard:</span>
+            <span class="mohs-delta-badge delta-med">⚠️ Moderate Friction Risk</span>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.76rem; color: #FDE68A;">
+            <strong>Caution:</strong> Noticeable hardness differential. Ensure smooth rounded bead surfaces and avoid violent shaking or high-impact athletic wear.
+          </p>
+        `;
+      } else {
+        wearHazardHtml = `
+          <div class="mohs-row">
+            <span>Hardness Range:</span>
+            <span>${minMohs.toFixed(1)} – ${maxMohs.toFixed(1)} (Δ ${deltaMohs})</span>
+          </div>
+          <div class="mohs-row">
+            <span>Abrasion Hazard:</span>
+            <span class="mohs-delta-badge delta-low"> Low Physical Wear Clash</span>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.76rem; color: #A7F3D0;">
+            <strong>Safe:</strong> Beads share similar hardness ratings. Minimal risk of mutual scratching under casual daily wear.
+          </p>
+        `;
+      }
+
+      // Black stone count
+      const blackCount = selStoneObjects.filter(s => s.isBlack).length;
+      let blackWarning = "";
+      if (blackCount >= 2) {
+        blackWarning = `<span class="meter-tag" style="background: #450A0A; border-color: #991B1B; color: #FCA5A5;">⚠️ ${blackCount} Black Stones (Rule 1 Risk: Auric Heaviness)</span>`;
+      } else {
+        blackWarning = `<span class="meter-tag" style="background: #052E16; border-color: #166534; color: #86EFAC;"> ${blackCount} Black Stone (Balanced 1:1 Ratio)</span>`;
+      }
+
+      // Elemental tags
+      const elements = [...new Set(selStoneObjects.flatMap(s => s.element.split('&').map(e => e.trim())))];
+      const chakras = [...new Set(selStoneObjects.map(s => s.chakraCategory))];
+
+      let bannerType = "";
+      let bannerTitle = "";
+      let bannerDesc = "";
+
+      if (curMatch && avoidMatch) {
+        bannerType = "banner-dual";
+        bannerTitle = "🔄 Context-Dependent Synergy (Curated Stack with Situational Warning)";
+        bannerDesc = "This combination has a strong intentional synergy for specific goals, but also presents known friction under certain conditions (such as bedtime wear or emotional vulnerability). Read both cards below!";
+      } else if (curMatch) {
+        bannerType = "banner-good";
+        bannerTitle = "✨ Harmonious Synergy (Curated Good Trio)";
+        bannerDesc = "This trio is an intentionally balanced energetic circuit designed to synergize chakras and elements without friction.";
+      } else if (avoidMatch) {
+        bannerType = "banner-avoid";
+        bannerTitle = "⚠️ Incompatible Trio / Caution Advised (Trio to Avoid)";
+        bannerDesc = "This trio produces significant energetic, chakral, or somatic friction. Review the specific conflict vectors and symptoms below.";
+      } else {
+        bannerType = "banner-custom";
+        bannerTitle = "🔵 Custom Balanced Triad (Real-Time Synthesis)";
+        bannerDesc = "This combination is a custom blend of the 8 foundational gemstones. Review the real-time elemental and chakral distribution below.";
+      }
+
+      let contentHtml = `
+        <div class="result-banner ${bannerType}">
+          <div class="banner-text">
+            <h3>${bannerTitle}</h3>
+            <p>${bannerDesc}</p>
+          </div>
+        </div>
+
+        <div class="result-grid">
+      `;
+
+      // Curated Card (if match)
+      if (curMatch) {
+        contentHtml += `
+          <div class="result-card card-good">
+            <span class="card-header-badge badge-good">✨ Curated Good Trio #${curMatch.index}</span>
+            <h4>${curMatch.name}</h4>
+            <div class="stones-sub">${curMatch.stones}</div>
+            <p>${curMatch.description}</p>
+            <p style="font-size: 0.75rem; color: #2DD4BF;"><strong>Chakral Focus:</strong> ${chakras.join(' • ')}</p>
+          </div>
+        `;
+      }
+
+      // Avoid Card (if match)
+      if (avoidMatch) {
+        contentHtml += `
+          <div class="result-card card-avoid">
+            <span class="card-header-badge badge-avoid">⚠️ Trio to Avoid #${avoidMatch.index}</span>
+            <h4>${avoidMatch.name}</h4>
+            <div class="stones-sub">${avoidMatch.stones}</div>
+            <p><strong>Conflict:</strong> ${avoidMatch.conflict}</p>
+            <p><strong>Daily Symptoms:</strong> ${avoidMatch.symptoms}</p>
+            <p style="background: rgba(220, 38, 38, 0.12); padding: 8px; border-radius: 4px; border: 1px solid rgba(220, 38, 38, 0.25);">
+              <strong>How to Fix:</strong> ${avoidMatch.fix}
+            </p>
+          </div>
+        `;
+      }
+
+      // If custom (neither in curated nor avoid)
+      if (!curMatch && !avoidMatch) {
+        contentHtml += `
+          <div class="result-card" style="border-left: 4px solid #3B82F6;">
+            <span class="card-header-badge" style="background: rgba(59, 130, 246, 0.15); color: #60A5FA;">Dynamic Synthesis</span>
+            <h4>${selectedStones.join(' + ')}</h4>
+            <p><strong>Combined Core Themes:</strong> ${selStoneObjects.map(s => s.theme).join(' • ')}</p>
+            <p><strong>Chakral Distribution:</strong> Encompasses the ${chakras.join(', ')} chakras.</p>
+            <p><strong>Wearing Advice:</strong> Determine your specific intention (e.g. internal receptive work vs external projective output) and ensure you follow the 1:1 black stone rule to maintain energetic buoyancy.</p>
+          </div>
+        `;
+      }
+
+      // Physical Mohs Card (always shown)
+      contentHtml += `
+        <div class="result-card card-wear">
+          <span class="card-header-badge badge-wear">🔨 Physical Wear & Mohs Hardness</span>
+          <h4>Bead Durability & Friction Analysis</h4>
+          <div class="stones-sub">${selectedStones.map(s => {
+            const stone = gemstones.find(g => g.name === s);
+            return `${stone.name} (${stone.mohsRange})`;
+          }).join(' + ')}</div>
+          <div class="mohs-meter-box">
+            ${wearHazardHtml}
+          </div>
+        </div>
+      `;
+
+      contentHtml += `</div>`; // end result-grid
+
+      // Balance meters
+      contentHtml += `
+        <div class="balance-meters">
+          <div class="meter-group">
+            <h5>Chakra Distribution (${chakras.length} Centers)</h5>
+            <div class="meter-tags">
+              ${chakras.map(c => `<span class="meter-tag">${c}</span>`).join('')}
+              ${blackWarning}
+            </div>
+          </div>
+          <div class="meter-group">
+            <h5>Elemental Composition (${elements.length} Elements)</h5>
+            <div class="meter-tags">
+              ${elements.map(e => `<span class="meter-tag">${e}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      box.innerHTML = contentHtml;
+    }
+
+    // =========================================================
+    // SECTION 1: MASTER REFERENCE TABLE LOGIC
+    // =========================================================
+    function setChakraFilter(chakra, el) {
+      currentChakraFilter = chakra;
+      document.querySelectorAll('#chakraFilterGroup .chip-filter').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      filterMasterTable();
+    }
+
+    function filterMasterTable() {
+      const q = document.getElementById('stoneSearchInput').value.toLowerCase();
+      const tbody = document.getElementById('masterTableBody');
+      tbody.innerHTML = '';
+
+      gemstones.forEach(stone => {
+        const matchesChakra = currentChakraFilter === 'ALL' || stone.chakra.toLowerCase().includes(currentChakraFilter.toLowerCase());
+        const matchSearch = stone.name.toLowerCase().includes(q) ||
+                            stone.theme.toLowerCase().includes(q) ||
+                            stone.element.toLowerCase().includes(q) ||
+                            stone.properties.toLowerCase().includes(q) ||
+                            stone.emotionalSupport.toLowerCase().includes(q) ||
+                            stone.tags.some(t => t.toLowerCase().includes(q));
+
+        if (matchesChakra && matchSearch) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>
+              <div class="stone-cell">
+                <div class="cell-bead" style="background: ${stone.color}; border: 1px solid ${stone.accentColor};"></div>
+                <div>
+                  <div>${stone.name}</div>
+                  <div>${stone.tags.map(t => `<span class="tag-badge">${t}</span>`).join('')}</div>
+                </div>
+              </div>
+            </td>
+            <td><strong>${stone.chakra}</strong></td>
+            <td>${stone.element}</td>
+            <td><strong>${stone.theme}</strong></td>
+            <td>
+              ${stone.sisterStones.map(s => `<div>• <strong>${s.name}:</strong> ${s.role}</div>`).join('')}
+            </td>
+            <td>${stone.properties}</td>
+            <td>${stone.emotionalSupport}</td>
+            <td>
+              <button class="btn btn-test" onclick="toggleStoneSelection('${stone.name}')">
+                ${selectedStones.includes(stone.name) ? 'Remove' : '+ Select'}
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+
+    function renderMasterTable() {
+      filterMasterTable();
+    }
+
+    // =========================================================
+    // SECTIONS 5 & 6 CATALOG GRIDS
+    // =========================================================
+    function renderCuratedGrid() {
+      filterCuratedGrid();
+    }
+
+    function filterCuratedGrid() {
+      const q = document.getElementById('curatedSearchInput') ? document.getElementById('curatedSearchInput').value.toLowerCase() : '';
+      const grid = document.getElementById('curatedGrid');
+      grid.innerHTML = '';
+
+      curatedTrios.forEach(trio => {
+        const match = trio.name.toLowerCase().includes(q) ||
+                      trio.stones.toLowerCase().includes(q) ||
+                      trio.description.toLowerCase().includes(q);
+
+        if (match) {
+          const card = document.createElement('div');
+          card.className = 'trio-card curated';
+          card.innerHTML = `
+            <div>
+              <div class="trio-card-title">${trio.index}. ${trio.name}</div>
+              <div class="trio-card-stones">
+                <span>💎</span> ${trio.stones}
+              </div>
+              <div class="trio-card-body">${trio.description}</div>
+            </div>
+            <div class="trio-card-footer">
+              <span style="font-size: 0.7rem; color: #2DD4BF; font-weight: 700;">Curated Synergy</span>
+              <button class="btn btn-test" onclick="loadSpecificTrio(['${trio.stonesList[0]}', '${trio.stonesList[1]}', '${trio.stonesList[2]}'])">Analyze in Tool ↗</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        }
+      });
+    }
+
+    function renderAvoidGrid() {
+      filterAvoidGrid();
+    }
+
+    function filterAvoidGrid() {
+      const q = document.getElementById('avoidSearchInput') ? document.getElementById('avoidSearchInput').value.toLowerCase() : '';
+      const grid = document.getElementById('avoidGrid');
+      grid.innerHTML = '';
+
+      avoidTrios.forEach(trio => {
+        const match = trio.name.toLowerCase().includes(q) ||
+                      trio.stones.toLowerCase().includes(q) ||
+                      trio.conflict.toLowerCase().includes(q) ||
+                      trio.symptoms.toLowerCase().includes(q) ||
+                      trio.fix.toLowerCase().includes(q);
+
+        if (match) {
+          const card = document.createElement('div');
+          card.className = 'trio-card avoid';
+          card.innerHTML = `
+            <div>
+              <div class="trio-card-title">${trio.index}. ${trio.name}</div>
+              <div class="trio-card-stones">
+                <span>⚠️</span> ${trio.stones}
+              </div>
+              <div class="trio-card-body">
+                <p><strong>Conflict:</strong> ${trio.conflict}</p>
+                <p style="margin-top: 6px;"><strong>Symptoms:</strong> ${trio.symptoms}</p>
+                <p style="margin-top: 6px; color: #86EFAC;"><strong>Fix:</strong> ${trio.fix}</p>
+              </div>
+            </div>
+            <div class="trio-card-footer">
+              <span style="font-size: 0.7rem; color: #F87171; font-weight: 700;">Incompatible Trio</span>
+              <button class="btn btn-test" onclick="loadSpecificTrio(['${trio.stonesList[0]}', '${trio.stonesList[1]}', '${trio.stonesList[2]}'])">Analyze in Tool ↗</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        }
+      });
+    }
+
+    // =========================================================
+    // TABS LOGIC
+    // =========================================================
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // =========================================================
+    // SCRATCH TEST SIMULATOR LOGIC
+    // =========================================================
+    function initScratchSimulator() {
+      const s1 = document.getElementById('scratchStone1');
+      const s2 = document.getElementById('scratchStone2');
+      s1.innerHTML = '';
+      s2.innerHTML = '';
+
+      gemstones.forEach(stone => {
+        s1.innerHTML += `<option value="${stone.name}">${stone.name} (${stone.mohsRange})</option>`;
+        s2.innerHTML += `<option value="${stone.name}">${stone.name} (${stone.mohsRange})</option>`;
+      });
+
+      s1.selectedIndex = 1; // Black Tourmaline (7.0 - 7.5)
+      s2.selectedIndex = 6; // Red Coral (3.0 - 4.0)
+
+      runScratchSimulator();
+    }
+
+    function runScratchSimulator() {
+      const name1 = document.getElementById('scratchStone1').value;
+      const name2 = document.getElementById('scratchStone2').value;
+      const resBox = document.getElementById('scratchResultBox');
+
+      const st1 = gemstones.find(g => g.name === name1);
+      const st2 = gemstones.find(g => g.name === name2);
+
+      if (st1.name === st2.name) {
+        resBox.innerHTML = `
+          <strong style="color: #60A5FA;">Equal Hardness (${st1.name} vs. ${st2.name}):</strong>
+          <p style="margin-top: 4px; color: #94A3B8;">Both stones share the exact same hardness (${st1.mohsRange}). They will not abrade each other under normal circumstances, though glass or fragile varieties (like Obsidian) can still suffer edge chipping from heavy impacts.</p>
+        `;
+        return;
+      }
+
+      if (st1.mohs > st2.mohs) {
+        const delta = (st1.mohs - st2.mohs).toFixed(1);
+        resBox.innerHTML = `
+          <strong style="color: #F87171;">⚠️ ${st1.name} (Mohs ${st1.mohsRange}) will scratch and abrade ${st2.name} (Mohs ${st2.mohsRange})!</strong>
+          <p style="margin-top: 4px; color: #CBD5E1;">
+            Hardness differential is <strong>${delta} Mohs</strong>. ${st1.name} has a hard, durable structure (${st1.tier}) while ${st2.name} is ${st2.tier}.
+            <br/><strong>Recommendation:</strong> Do NOT place these two beads in direct rubbing contact. Use silicone o-rings or leather spacer washers, or wear them on separate wrists.
+          </p>
+        `;
+      } else {
+        const delta = (st2.mohs - st1.mohs).toFixed(1);
+        resBox.innerHTML = `
+          <strong style="color: #F87171;">⚠️ ${st2.name} (Mohs ${st2.mohsRange}) will scratch and abrade ${st1.name} (Mohs ${st1.mohsRange})!</strong>
+          <p style="margin-top: 4px; color: #CBD5E1;">
+            Hardness differential is <strong>${delta} Mohs</strong>. ${st2.name} has a hard, durable structure (${st2.tier}) while ${st1.name} is ${st1.tier}.
+            <br/><strong>Recommendation:</strong> Do NOT place these two beads in direct rubbing contact. Use silicone o-rings or leather spacer washers, or wear them on separate wrists.
+          </p>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
