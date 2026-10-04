@@ -1,7 +1,6 @@
 # 💎 Gemstone Trio Builder & Metaphysical Synergy Analyzer
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0D9488?style=for-the-badge&logo=github)](https://yusuke614.github.io/gemstone-trio-builder/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-success?style=for-the-badge)](index.html)
 [![Guide Edition](https://img.shields.io/badge/Guide%20Edition-v19%20(5--Page%20Master)-orange?style=for-the-badge)](Gemstone_Metaphysical_Properties_Guide_v19.pdf)
 
